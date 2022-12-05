@@ -2,18 +2,13 @@ public class MBTIType {
     private char[] MBTI = new char[4];
     private String[] cogFun = new String[4];
     private String[] split = new String[2];
-    private boolean extrovet = false;
+    private boolean extrovert = false;
     private boolean judger = false;
-    private boolean inuitive = false;
     private boolean sensor = false;
     public MBTIType () {}
 
     public void MBTIArrays(String letters){
         letters = letters.toUpperCase();
-        for (int i = 0; i < MBTI.length; i++) {
-            MBTI[i] = letters.charAt(i);
-            System.out.print(MBTI[i]);
-        }
         split[0] = letters.substring(0,2);
         split[1] = letters.substring(2,4);
 
@@ -22,21 +17,27 @@ public class MBTIType {
 
     public void firstCogFun() {
         if (MBTI[0] == 'E') {
-            extrovet = true;
+            extrovert = true;
         }
 
         if (MBTI[3] == 'J') {
             judger = true;
         }
 
-        if (extrovet && judger) {
+        if (extrovert && judger) {
             ejFunction1();
-        } else if (!extrovet && judger) {
+        } else if (!extrovert && judger) {
             ijFunction2();
-        } else if (extrovet) {
+        } else if (extrovert) {
             epFunction1();
         } else {
             ipFunction2();
+        }
+        for (int i = 0; i < cogFun.length; i++) {
+            System.out.print(cogFun[i]);
+            if (i != 3) {
+                System.out.print("->");
+            }
         }
     }
 
@@ -45,10 +46,15 @@ public class MBTIType {
             sensor = true;
         }
 
-        if (MBTI[1] == 'N') {
-            inuitive = true;
+        if (cogFun[0] != null && sensor == false) {
+            enFunction2();
+        } else if (cogFun[0] != null && sensor) {
+            esFunction2();
+        } else if (cogFun[1] != null && sensor == false) {
+            inFunction1();
+        } else {
+            isFunction1();
         }
-
 
     }
 
@@ -96,4 +102,57 @@ public class MBTIType {
         }
         secondCogFun();
     }
+
+    public void enFunction2() {
+        if (MBTI[3] == 'J') {
+            cogFun[1] = "Ni";
+            cogFun[2] = "Se";
+        } else if (MBTI[2] == 'F') {
+            cogFun[1] = "Fi";
+            cogFun[2] = "Te";
+        } else {
+            cogFun[1] = "Ti";
+            cogFun[2] = "Fe";
+        }
+    }
+
+    public void esFunction2() {
+        if (MBTI[3] == 'J') {
+            cogFun[1] = "Ni";
+            cogFun[2] = "Se";
+        } else if (MBTI[2] == 'F') {
+            cogFun[1] = "Fi";
+            cogFun[2] = "Te";
+        } else {
+            cogFun[1] = "Ti";
+            cogFun[2] = "Fe";
+        }
+    }
+
+    public void inFunction1() {
+        if (MBTI[3] == 'J') {
+            cogFun[0] = "Ni";
+            cogFun[3] = "Se";
+        } else if (MBTI[2] == 'F') {
+            cogFun[0] = "Fi";
+            cogFun[3] = "Te";
+        } else {
+            cogFun[0] = "Ti";
+            cogFun[3] = "Fe";
+        }
+    }
+
+    public void isFunction1() {
+        if (MBTI[3] == 'J') {
+            cogFun[0] = "Si";
+            cogFun[3] = "Ne";
+        } else if (MBTI[2] == 'F') {
+            cogFun[0] = "Fi";
+            cogFun[3] = "Te";
+        } else {
+            cogFun[0] = "Ti";
+            cogFun[3] = "Fe";
+        }
+    }
+
 }
