@@ -1,16 +1,24 @@
+import java.util.Arrays;
+
 public class MBTIType {
     private char[] MBTI = new char[4];
     private String[] cogFun = new String[4];
     private String[] split = new String[2];
     private boolean extrovert = false;
     private boolean judger = false;
-    private boolean sensor = false;
     public MBTIType () {}
 
     public void MBTIArrays(String letters){
+        Arrays.fill(MBTI, ' ');
+        Arrays.fill(cogFun, "");
+        Arrays.fill(split, "");
         letters = letters.toUpperCase();
         split[0] = letters.substring(0,2);
         split[1] = letters.substring(2,4);
+
+        for (int i = 0; i < MBTI.length; i++) {
+            MBTI[i] = letters.charAt(i);
+        }
 
         firstCogFun();
     }
@@ -33,6 +41,7 @@ public class MBTIType {
         } else {
             ipFunction2();
         }
+
         for (int i = 0; i < cogFun.length; i++) {
             System.out.print(cogFun[i]);
             if (i != 3) {
@@ -42,18 +51,21 @@ public class MBTIType {
     }
 
     public void secondCogFun() {
-        if (MBTI[1] == 'S') {
-            sensor = true;
-        }
 
-        if (cogFun[0] != null && sensor == false) {
+        if (split[0].equals("EN")) {
             enFunction2();
-        } else if (cogFun[0] != null && sensor) {
+            System.out.println("EN2 WORK");
+        } else if (split[0].equals("ES")) {
             esFunction2();
-        } else if (cogFun[1] != null && sensor == false) {
+            System.out.println("ES2 WORK");
+        } else if (split[0].equals("IN")) {
             inFunction1();
-        } else {
+            System.out.println("IN1 WORK");
+        } else if (split[0].equals("IS")) {
             isFunction1();
+            System.out.println("IS1 WORK");
+        } else {
+            System.out.println("NOT WORKING");
         }
 
     }
